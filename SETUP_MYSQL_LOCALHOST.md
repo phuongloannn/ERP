@@ -47,7 +47,9 @@ DB_NAME=fried_chicken_4s
 
 ## Step 5: Install Dependencies
 \`\`\`bash
-npm install mysql2/promise
+npm install mysql2
+# or with pnpm
+# pnpm add mysql2
 \`\`\`
 
 ## Step 6: Run Development Server

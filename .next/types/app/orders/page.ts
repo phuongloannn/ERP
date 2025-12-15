@@ -1,4 +1,4 @@
-// File: C:\fried-chicken-website (1)\app\orders\page.tsx
+// File: D:\ERP\app\orders\page.tsx
 import * as entry from '../../../../app/orders/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

@@ -40,8 +40,15 @@ export default function Home() {
       title: 'Customer Ordering',
       description: 'Online ordering system',
       icon: Users,
-      href: '/order',
+      href: '/shop',
       color: 'bg-purple-600/10 text-purple-600 dark:text-purple-400',
+    },
+    {
+      title: 'My Account',
+      description: 'Profile & order history',
+      icon: ClipboardList,
+      href: '/account',
+      color: 'bg-teal-600/10 text-teal-600 dark:text-teal-400',
     },
     {
       title: 'Order Management',

@@ -1,4 +1,4 @@
-// File: C:\fried-chicken-website (1)\app\api\inventory\route.ts
+// File: D:\ERP\app\api\inventory\route.ts
 import * as entry from '../../../../../app/api/inventory/route.js'
 import type { NextRequest } from 'next/server.js'
 

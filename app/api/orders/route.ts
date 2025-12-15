@@ -1,4 +1,6 @@
 import { db } from '@/lib/db';
+import { cookies } from 'next/headers';
+import { verifyToken } from '@/lib/auth';
 
 export async function GET(request: Request) {
   try {
@@ -133,6 +135,18 @@ export async function POST(request: Request) {
       items, 
       notes 
     } = data;
+
+    // Attach authenticated user if available
+    let userId: number | null = null;
+    try {
+      const token = cookies().get('auth_token')?.value;
+      const payload = verifyToken(token);
+      if (payload) {
+        userId = Number(payload.sub) || null;
+      }
+    } catch {
+      userId = null;
+    }
     
     if (!order_type || !items || items.length === 0) {
       return Response.json(
@@ -164,8 +178,8 @@ export async function POST(request: Request) {
     const orderQuery = `
       INSERT INTO orders (
         order_number, order_type, status, subtotal, tax, discount, total,
-        payment_status, customer_name, customer_phone, delivery_address, notes
-      ) VALUES (?, ?, 'pending', ?, ?, 0, ?, 'pending', ?, ?, ?, ?)
+        payment_status, customer_name, customer_phone, delivery_address, notes, user_id
+      ) VALUES (?, ?, 'pending', ?, ?, 0, ?, 'pending', ?, ?, ?, ?, ?)
     `;
     
     // SỬA: THÊM delivery_address vào parameters
@@ -178,7 +192,8 @@ export async function POST(request: Request) {
       customer_name, 
       customer_phone, 
       delivery_address, // THÊM delivery_address
-      notes || ''       // notes có thể undefined
+      notes || '',       // notes có thể undefined
+      userId
     ]) as any;
     
     const orderId = orderResult.insertId;
